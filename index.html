@@ -1,4 +1,85 @@
-NaN 문장</div></div><div id="ppct" style="font-size:18px;font-weight:800;color:var(--blue);">0%</div></div>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Haley and Alex Babysit Manny and Luke</title>
+<style>*{box-sizing:border-box;margin:0;padding:0;}
+:root{--navy:#1e2d4a;--blue:#3b82f6;--blue-light:#dbeafe;--green:#10b981;--green-dark:#065f46;--green-light:#d1fae5;--orange:#f97316;--orange-light:#ffedd5;--beige:#f5f0ea;--beige-mid:#e8e0d4;--g100:#f1f5f9;--g200:#e2e8f0;--g400:#94a3b8;--g500:#64748b;--g600:#475569;--card:#fff;--fs:15px;--hfs:19px;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--g100);color:var(--navy);min-height:100vh;}
+.prog-wrap{display:flex;align-items:center;gap:10px;padding:8px 12px;}
+.prog-bar-wrap{flex:1;height:5px;background:var(--g200);border-radius:99px;overflow:hidden;}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--blue),#818cf8);border-radius:99px;transition:width .5s;}
+#vert{display:block;}#vert.off{display:none;}
+.vert-top{position:sticky;top:0;z-index:100;background:var(--card);box-shadow:0 2px 10px rgba(0,0,0,.08);border-radius:0 0 18px 18px;}
+.vert-top iframe{width:100%;height:28vh;max-height:220px;border:none;display:block;}
+.vert-ctrl{padding:10px 12px 14px;display:flex;flex-direction:column;gap:8px;}
+.btns{display:flex;gap:6px;flex-wrap:wrap;align-items:center;}
+.btn{padding:7px 13px;border-radius:9px;border:1.5px solid var(--g200);background:var(--card);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;}
+.btn.mode.on{background:var(--orange-light);color:var(--orange);}
+.btn.tr.on{background:var(--green-light);color:var(--green-dark);}
+.btn.lay{background:var(--navy);color:#fff;border-color:var(--navy);margin-left:auto;}
+.fpwrap{position:relative;}
+.fpop{display:none;position:absolute;top:calc(100% + 6px);left:0;background:var(--card);border:1.5px solid var(--g200);border-radius:12px;padding:12px;z-index:99;min-width:180px;box-shadow:0 8px 24px rgba(0,0,0,.12);}
+.fpop.open{display:block;}
+.fplbl{font-size:11px;font-weight:700;color:var(--g500);margin-bottom:8px;}
+.fprow{display:flex;gap:6px;flex-wrap:wrap;}
+.fpo{padding:5px 11px;border-radius:8px;border:1.5px solid var(--g200);background:var(--g100);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;}
+.fpo.on{background:var(--blue);color:#fff;border-color:var(--blue);}
+.sub-list{padding:8px 10px 30px;display:flex;flex-direction:column;gap:7px;}
+.sc{background:var(--card);border-radius:13px;box-shadow:0 1px 4px rgba(0,0,0,.06);overflow:hidden;}
+.sc.playing{animation:cpulse 1.4s ease-in-out infinite;}
+@keyframes cpulse{0%,100%{box-shadow:0 0 0 2.5px var(--blue),0 4px 14px rgba(59,130,246,.15);}50%{box-shadow:0 0 0 4px var(--blue),0 6px 18px rgba(59,130,246,.3);}}
+.sc.done{background:#f0fdf4;}
+.sc-in{display:flex;align-items:stretch;}
+.spa{flex:1;padding:11px 13px;cursor:pointer;text-align:left;background:transparent;border:none;line-height:1.45;word-break:break-word;}
+.eng{display:block;font-size:var(--fs);font-weight:500;color:var(--navy);}
+.sc.done .eng{color:var(--green-dark);text-decoration:line-through;}
+.kwrap{overflow:hidden;max-height:0;transition:max-height .25s,margin-top .2s;}
+.kwrap.open{max-height:60px;margin-top:5px;}
+.kt{font-size:calc(var(--fs) - 3px);color:var(--g600);font-style:italic;display:block;padding-top:5px;border-top:1px solid var(--blue-light);}
+.sacts{display:flex;flex-direction:column;border-left:1px solid var(--g100);flex-shrink:0;}
+.sa{flex:1;width:42px;border:none;background:transparent;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:background .12s;}
+.sa:hover{background:var(--g100);}.sa.chk{color:var(--green);}.sa.hid{background:var(--g100);}.sa:first-child{border-bottom:1px solid var(--g100);}
+#horiz{display:none;}#horiz.on{display:flex;flex-direction:row;}
+.h-left{width:40%;min-width:300px;flex-shrink:0;background:var(--beige);border-right:1px solid var(--beige-mid);display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow:hidden;}
+.h-title{padding:14px 18px 12px;background:var(--card);border-bottom:1px solid var(--beige-mid);flex-shrink:0;}
+.h-main{font-size:19px;font-weight:800;color:var(--navy);}
+.h-sub{font-size:12px;color:var(--g400);margin-top:3px;}
+.h-vid{flex:1;display:flex;align-items:center;padding:12px 16px;min-height:0;}
+.h-vid iframe{width:100%;aspect-ratio:16/9;border:none;border-radius:12px;}
+.h-btns{display:flex;gap:6px;flex-wrap:wrap;padding:10px 14px;border-top:1px solid var(--beige-mid);flex-shrink:0;}
+.hb{padding:7px 13px;border-radius:9px;border:1.5px solid var(--g200);background:var(--card);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;}
+.hb.mode.on{background:var(--orange-light);color:var(--orange);}
+.hb.tr.on{background:var(--green-light);color:var(--green-dark);}
+.hb.lay{background:var(--navy);color:#fff;border-color:var(--navy);margin-left:auto;}
+.h-right{flex:1;overflow-y:auto;background:var(--g100);}
+.h-prog{padding:8px 14px;background:var(--card);border-bottom:1px solid var(--g200);display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:10;}
+.h-prog-bar{flex:1;height:5px;background:var(--g200);border-radius:99px;overflow:hidden;}
+.h-prog-fill{height:100%;background:linear-gradient(90deg,var(--blue),#818cf8);border-radius:99px;transition:width .5s;}
+.h-prog-txt{font-size:12px;color:var(--g400);white-space:nowrap;}
+.h-fpwrap{position:relative;}
+.h-fpop{display:none;position:absolute;top:calc(100% + 6px);left:0;background:var(--card);border:1.5px solid var(--g200);border-radius:12px;padding:12px;z-index:99;min-width:180px;box-shadow:0 8px 24px rgba(0,0,0,.12);}
+.h-fpop.open{display:block;}
+.h-sub-list{padding:10px 14px 30px;display:flex;flex-direction:column;gap:7px;}
+.hrow{background:var(--card);border-radius:13px;box-shadow:0 1px 4px rgba(0,0,0,.06);overflow:hidden;display:flex;align-items:stretch;}
+.hrow.playing{animation:cpulse 1.4s ease-in-out infinite;}
+.hsb{flex:1;padding:11px 13px;cursor:pointer;text-align:left;background:transparent;border:none;line-height:1.45;word-break:break-word;}
+.h-eng{display:block;font-size:var(--hfs);font-weight:500;color:var(--navy);}
+.hrow.done .h-eng{color:var(--green-dark);text-decoration:line-through;}
+.hkwrap{overflow:hidden;max-height:0;transition:max-height .25s,margin-top .2s;}
+.hkwrap.open{max-height:60px;margin-top:5px;}
+.hkt{font-size:calc(var(--hfs) - 4px);color:var(--g600);font-style:italic;display:block;padding-top:5px;border-top:1px solid var(--blue-light);}
+.hacts{display:flex;flex-direction:column;border-left:1px solid var(--g100);flex-shrink:0;}
+.ha{flex:1;width:48px;border:none;background:transparent;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:background .12s;}
+.ha:hover{background:var(--g100);}.ha.chk{color:var(--green);}.ha.hid{background:var(--g100);}.ha:first-child{border-bottom:1px solid var(--g100);}</style>
+</head>
+<body>
+<div id="vert">
+<div class="vert-top">
+<iframe id="pv" src="https://www.youtube.com/embed/4EOJU-bPMqA?enablejsapi=1" allow="autoplay" allowfullscreen></iframe>
+<div class="vert-ctrl">
+<div class="prog-wrap"><svg width="42" height="42" viewBox="0 0 42 42"><circle cx="21" cy="21" r="19" fill="none" stroke="#e2e8f0" stroke-width="3"/><circle id="pfg" cx="21" cy="21" r="19" fill="none" stroke="#3b82f6" stroke-width="3" stroke-dasharray="119.38" stroke-dashoffset="119.38" stroke-linecap="round" transform="rotate(-90 21 21)"/></svg><div style="flex:1"><div class="prog-bar-wrap"><div class="prog-fill" id="pbar" style="width:0%"></div></div><div style="font-size:11px;color:var(--g500);margin-top:3px;" id="pcnt">0 / 0 문장</div></div><div id="ppct" style="font-size:18px;font-weight:800;color:var(--blue);">0%</div></div>
 <div class="btns">
 <button class="btn mode" id="v-mode">▶ 한줄</button>
 <button class="btn tr" id="v-tr">번역</button>
@@ -10,7 +91,7 @@ NaN 문장</div></div><div id="ppct" style="font-size:18px;font-weight:800;color
 </div>
 <div id="horiz">
 <div class="h-left">
-<div class="h-title"><div class="h-main">Haley and Alex Babysit Manny and Luke</div><div class="h-sub">Modern Family</div></div>
+<div class="h-title"><div class="h-main">Haley and Alex Babysit Manny and Luke</div><div class="h-sub" style="display:block">Modern Family</div></div>
 <div class="h-vid"><iframe id="ph" src="https://www.youtube.com/embed/4EOJU-bPMqA?enablejsapi=1" allow="autoplay" allowfullscreen></iframe></div>
 <div class="h-btns">
 <button class="hb mode" id="h-mode">▶ 한줄</button>
@@ -570,6 +651,552 @@ const SUBS=[
     "end": 224.99,
     "text": "Is anyone watching me?",
     "kor": "누가 나 보고 있어?"
+  },
+  {
+    "start": 0.48,
+    "end": 2.63,
+    "text": "Hey, you sure you don't want to play the Hunger Games with all of us?",
+    "kor": "야, 우리랑 헝거게임 하기 싫은 거 맞지?"
+  },
+  {
+    "start": 2.64,
+    "end": 5.44,
+    "text": "My whole life is a hunger game, why do you think I'm so mean to you?",
+    "kor": "내 인생 자체가 헝거게임이야, 내가 왜 너한테 이렇게 심하게 구는 것 같아?"
+  },
+  {
+    "start": 6.13,
+    "end": 7.24,
+    "text": "That's for me.",
+    "kor": "그건 나한테 온 거야."
+  },
+  {
+    "start": 9.88,
+    "end": 11.16,
+    "text": "Hey, come on in.",
+    "kor": "야, 어서 들어와."
+  },
+  {
+    "start": 11.16,
+    "end": 12.96,
+    "text": "Hi. Hey, I'm out.",
+    "kor": "안녕. 야, 나 간다."
+  },
+  {
+    "start": 13.68,
+    "end": 15.28,
+    "text": "This is Becca and her cousin Joyce.",
+    "kor": "얘는 베카고, 얘는 베카 사촌 조이스야."
+  },
+  {
+    "start": 15.65,
+    "end": 16.74,
+    "text": "Joyce is for you.",
+    "kor": "조이스는 너 거야."
+  },
+  {
+    "start": 16.74,
+    "end": 19.84,
+    "text": "What, I'm on a date? But I'm not wearing any cologne.",
+    "kor": "뭐, 나 데이트 중이야? 근데 향수도 안 뿌렸는데."
+  },
+  {
+    "start": 20.4,
+    "end": 23.08,
+    "text": "Did you know this was happening? I don't even know what this is.",
+    "kor": "이거 알고 있었어? 나는 이게 뭔지도 몰라."
+  },
+  {
+    "start": 23.12,
+    "end": 26.12,
+    "text": "Joyce, this is Manny. Pleasure to make your acquaintance.",
+    "kor": "조이스, 이쪽은 매니야. 만나서 반갑습니다."
+  },
+  {
+    "start": 26.16,
+    "end": 28.28,
+    "text": "Can I offer you a glass of sparkling cider?",
+    "kor": "스파클링 사이다 한 잔 드릴까요?"
+  },
+  {
+    "start": 28.68,
+    "end": 30.4,
+    "text": "He's not how you described him.",
+    "kor": "네가 말했던 것과 다른데."
+  },
+  {
+    "start": 30.64,
+    "end": 31.92,
+    "text": "Don't worry, you'll love him.",
+    "kor": "걱정 마, 좋아하게 될 거야."
+  },
+  {
+    "start": 31.96,
+    "end": 34.6,
+    "text": "Manny, say something romantic. I can't just turn it on.",
+    "kor": "매니, 뭔가 로맨틱한 말 해봐. 그게 그냥 켜지는 게 아니야."
+  },
+  {
+    "start": 34.64,
+    "end": 36.08,
+    "text": "You say something romantic.",
+    "kor": "네가 뭔가 로맨틱한 말 해봐."
+  },
+  {
+    "start": 36.12,
+    "end": 39.04,
+    "text": "Cool shirt. Aww, can I see your room?",
+    "kor": "셔츠 멋진데. 어머, 방 볼 수 있어?"
+  },
+  {
+    "start": 39.08,
+    "end": 40.4,
+    "text": "Well, I didn't clean it for me.",
+    "kor": "뭐, 나를 위해 청소한 건 아니었는데."
+  },
+  {
+    "start": 47.44,
+    "end": 48.96,
+    "text": "They're going upstairs alone.",
+    "kor": "둘이 위층에 올라가고 있어."
+  },
+  {
+    "start": 48.96,
+    "end": 50.76,
+    "text": "Is that even allowed? I don't know.",
+    "kor": "그게 허락되는 거야? 모르겠어."
+  },
+  {
+    "start": 51.24,
+    "end": 53.04,
+    "text": "Should we say something? Like what?",
+    "kor": "우리가 뭔가 말해야 해? 뭐라고?"
+  },
+  {
+    "start": 53.08,
+    "end": 55.84,
+    "text": "Like, it's not okay. Well, maybe it is.",
+    "kor": "안 된다고. 뭐, 괜찮을 수도 있잖아."
+  },
+  {
+    "start": 56.16,
+    "end": 56.68,
+    "text": "Is it?",
+    "kor": "괜찮아?"
+  },
+  {
+    "start": 56.69,
+    "end": 59.64,
+    "text": "I don't know. I just feel like we're not doing our job as babysitters.",
+    "kor": "모르겠어. 그냥 우리가 베이비시터 역할을 못 하는 것 같아서."
+  },
+  {
+    "start": 59.68,
+    "end": 60.68,
+    "text": "Of course we are.",
+    "kor": "당연히 하고 있지."
+  },
+  {
+    "start": 63.73,
+    "end": 66.45,
+    "text": "I'm cold, and I saw a coyote.",
+    "kor": "추워, 그리고 코요테 봤어."
+  },
+  {
+    "start": 68.77,
+    "end": 70.96,
+    "text": "They've been in there forever, do something, you're in charge.",
+    "kor": "둘이 거기 엄청 오래 있잖아, 뭔가 해봐, 네가 책임자잖아."
+  },
+  {
+    "start": 70.96,
+    "end": 73.16,
+    "text": "Oh, please, we both know I'm just the figurehead here.",
+    "kor": "왜 이래, 여기서 내가 그냥 허수아비인 거 우리 둘 다 알잖아."
+  },
+  {
+    "start": 73.16,
+    "end": 76.01,
+    "text": "You really think they're doing something in there? He's 12.",
+    "kor": "진짜 거기서 뭔가 하고 있을 것 같아? 걔 12살이야."
+  },
+  {
+    "start": 76.05,
+    "end": 78.05,
+    "text": "He's 14, but it's touching how close you are.",
+    "kor": "14살이야, 근데 네가 얼마나 가까운지 감동적이네."
+  },
+  {
+    "start": 78.85,
+    "end": 79.35,
+    "text": "Fine.",
+    "kor": "알겠어."
+  },
+  {
+    "start": 82.37,
+    "end": 83.49,
+    "text": "What do you want?",
+    "kor": "뭐 원해?"
+  },
+  {
+    "start": 83.7,
+    "end": 85.27,
+    "text": "You have to keep your door open.",
+    "kor": "문 열어놔야 해."
+  },
+  {
+    "start": 85.27,
+    "end": 87.53,
+    "text": "Why? Why do you need it closed?",
+    "kor": "왜? 왜 닫아야 해?"
+  },
+  {
+    "start": 87.57,
+    "end": 88.89,
+    "text": "Because we're gonna make out.",
+    "kor": "우리 키스할 거거든."
+  },
+  {
+    "start": 88.93,
+    "end": 93.65,
+    "text": "Oh, um. Well, you, you can't have your door closed.",
+    "kor": "어, 음. 뭐, 너, 문 닫으면 안 돼."
+  },
+  {
+    "start": 93.81,
+    "end": 96.15,
+    "text": "Why? Do you want to watch or something? That's weird.",
+    "kor": "왜? 보고 싶은 거야? 그건 이상하잖아."
+  },
+  {
+    "start": 96.17,
+    "end": 98.26,
+    "text": "Ew, of course we don't want to watch.",
+    "kor": "으, 당연히 보고 싶지 않아."
+  },
+  {
+    "start": 98.37,
+    "end": 101.29,
+    "text": "Perfect. But you can't...",
+    "kor": "딱 좋네. 근데 안 돼..."
+  },
+  {
+    "start": 102.25,
+    "end": 103.52,
+    "text": "What just happened?",
+    "kor": "방금 무슨 일이야?"
+  },
+  {
+    "start": 105,
+    "end": 106.89,
+    "text": "Can I offer you a Pino Delgado?",
+    "kor": "피노 델가도 드릴까요?"
+  },
+  {
+    "start": 106.93,
+    "end": 109.17,
+    "text": "It's my own concoction. What's in it?",
+    "kor": "제가 만든 거예요. 뭐가 들어있어요?"
+  },
+  {
+    "start": 109.21,
+    "end": 111.07,
+    "text": "Let's just say it's cool, it's sweet,",
+    "kor": "그냥 시원하고, 달콤하고,"
+  },
+  {
+    "start": 111.08,
+    "end": 113.08,
+    "text": "and it's not afraid to embrace its own whimsy.",
+    "kor": "자신만의 변덕을 두려워하지 않는다고 해두죠."
+  },
+  {
+    "start": 113.83,
+    "end": 117.29,
+    "text": "I'm not saying that. I'm not drinking it either.",
+    "kor": "그런 말 안 할 거고. 마시지도 않을 거야."
+  },
+  {
+    "start": 118.65,
+    "end": 120.62,
+    "text": "So, you making any resolutions?",
+    "kor": "그래서, 새해 다짐 있어?"
+  },
+  {
+    "start": 120.9,
+    "end": 123.06,
+    "text": "Yeah, no more blind dates.",
+    "kor": "응, 소개팅 더 이상 안 하기."
+  },
+  {
+    "start": 123.9,
+    "end": 125.22,
+    "text": "You're mean.",
+    "kor": "나쁜 사람이네."
+  },
+  {
+    "start": 125.46,
+    "end": 127.14,
+    "text": "You know, she's right, Joyce.",
+    "kor": "있잖아, 맞는 말이야, 조이스."
+  },
+  {
+    "start": 127.26,
+    "end": 130.38,
+    "text": "You are mean. I've been a gracious host while you've been rude,",
+    "kor": "넌 나쁜 사람이야. 나는 훌륭한 호스트였는데 넌 무례하고,"
+  },
+  {
+    "start": 130.54,
+    "end": 131.65,
+    "text": "sullen and dull.",
+    "kor": "시무룩하고 따분했어."
+  },
+  {
+    "start": 131.72,
+    "end": 134.91,
+    "text": "You'll forgive me if I choose not to start the new year in such a negative note.",
+    "kor": "이렇게 부정적인 분위기로 새해를 시작하지 않겠다고 해도 이해해줄 거지?"
+  },
+  {
+    "start": 135.3,
+    "end": 137.41,
+    "text": "Oh, and if you're hungry for broccoli later",
+    "kor": "아, 그리고 나중에 브로콜리 먹고 싶으면,"
+  },
+  {
+    "start": 137.42,
+    "end": 138.59,
+    "text": "you'll find a piece in your teeth.",
+    "kor": "이 사이에 하나 끼어 있을 거야."
+  },
+  {
+    "start": 141.18,
+    "end": 143.18,
+    "text": "I'm sorry, I push people away.",
+    "kor": "미안해, 나는 사람들을 밀어내."
+  },
+  {
+    "start": 143.54,
+    "end": 145.9,
+    "text": "I feel myself do it, but I can't stop.",
+    "kor": "그러는 걸 느끼면서도 멈출 수가 없어."
+  },
+  {
+    "start": 145.98,
+    "end": 148.11,
+    "text": "It's hard to like someone when you don't like yourself.",
+    "kor": "자기 자신을 좋아하지 않으면 누군가를 좋아하기 어렵지."
+  },
+  {
+    "start": 148.13,
+    "end": 148.8,
+    "text": "You're right.",
+    "kor": "맞아."
+  },
+  {
+    "start": 149.26,
+    "end": 150.78,
+    "text": "You have so many good qualities.",
+    "kor": "너 좋은 점이 너무 많아."
+  },
+  {
+    "start": 151.18,
+    "end": 153.86,
+    "text": "You're attractive, you're witty, you're bright.",
+    "kor": "매력 있고, 재치 있고, 똑똑해."
+  },
+  {
+    "start": 154.26,
+    "end": 156.39,
+    "text": "I just wish you could see yourself through my eyes.",
+    "kor": "내 눈으로 너 자신을 볼 수 있으면 좋겠어."
+  },
+  {
+    "start": 156.86,
+    "end": 159.34,
+    "text": "Aww, you're such a good friend. Friend?",
+    "kor": "어머, 넌 정말 좋은 친구야. 친구?"
+  },
+  {
+    "start": 159.86,
+    "end": 160.99,
+    "text": "That's where this is headed?",
+    "kor": "그쪽으로 가는 거야?"
+  },
+  {
+    "start": 161.03,
+    "end": 163.14,
+    "text": "Well, friendships last longer.",
+    "kor": "뭐, 우정이 더 오래가잖아."
+  },
+  {
+    "start": 163.15,
+    "end": 165.22,
+    "text": "Not this one. I've got enough friends.",
+    "kor": "이건 아니야. 친구는 충분히 있어."
+  },
+  {
+    "start": 165.26,
+    "end": 168.13,
+    "text": "Happy New Year, Joyce.",
+    "kor": "새해 복 많이 받아, 조이스."
+  },
+  {
+    "start": 170.64,
+    "end": 171.78,
+    "text": "So what's the plan, Haley?",
+    "kor": "그래서 계획이 뭐야, 헤일리?"
+  },
+  {
+    "start": 171.82,
+    "end": 173.98,
+    "text": "I'm going in, that's our baby brother up there.",
+    "kor": "들어갈 거야, 저기 우리 남동생이 있잖아."
+  },
+  {
+    "start": 174.1,
+    "end": 175.34,
+    "text": "I'm not ready for all of this.",
+    "kor": "나 이런 거 아직 준비 안 됐어."
+  },
+  {
+    "start": 175.34,
+    "end": 176.93,
+    "text": "The girls, the hormones, it's gross.",
+    "kor": "여자애들, 호르몬, 역겨워."
+  },
+  {
+    "start": 176.95,
+    "end": 178.06,
+    "text": "Well, we can't just barge in.",
+    "kor": "그렇다고 그냥 쳐들어갈 수는 없잖아."
+  },
+  {
+    "start": 178.07,
+    "end": 180.02,
+    "text": "I'm still trying to get the image of Mom and Dad out of my-",
+    "kor": "엄마 아빠 이미지를 아직 머릿속에서 지우려고 하는 중인데-"
+  },
+  {
+    "start": 180.39,
+    "end": 182.27,
+    "text": "Oh, God, it's back. I'm coming in!",
+    "kor": "세상에, 다시 떠올랐어. 나 들어간다!"
+  },
+  {
+    "start": 183.27,
+    "end": 185.55,
+    "text": "What are you doing? Just putting away some laundry.",
+    "kor": "뭐 하는 거야? 그냥 빨래 정리하는 중이야."
+  },
+  {
+    "start": 186.27,
+    "end": 188.87,
+    "text": "That's a bra and a tablecloth.",
+    "kor": "그건 브라랑 식탁보잖아."
+  },
+  {
+    "start": 188.91,
+    "end": 190.05,
+    "text": "Can't you do this later?",
+    "kor": "이거 나중에 하면 안 돼?"
+  },
+  {
+    "start": 190.12,
+    "end": 191.94,
+    "text": "Excuse me, does your mother know you're here?",
+    "kor": "실례지만, 어머니가 여기 있는 거 알아?"
+  },
+  {
+    "start": 191.95,
+    "end": 192.51,
+    "text": "Yes.",
+    "kor": "응."
+  },
+  {
+    "start": 192.59,
+    "end": 194.05,
+    "text": "Does she know our parents aren't?",
+    "kor": "우리 부모님이 없다는 것도 알아?"
+  },
+  {
+    "start": 195.02,
+    "end": 195.59,
+    "text": "Yeah.",
+    "kor": "응."
+  },
+  {
+    "start": 195.87,
+    "end": 199.15,
+    "text": "Big pause, no eye contact, I was so much better at this than you.",
+    "kor": "긴 침묵, 눈도 못 마주치고, 나는 이런 거 너보다 훨씬 잘했는데."
+  },
+  {
+    "start": 199.19,
+    "end": 200.99,
+    "text": "You're out. No, she's not.",
+    "kor": "나가. 아니야, 안 나가도 돼."
+  },
+  {
+    "start": 200.99,
+    "end": 203.93,
+    "text": "Yes, she is, it's late, you're 13. 14.",
+    "kor": "맞아 나가야 해, 늦었어, 너 13살이잖아. 14살이야."
+  },
+  {
+    "start": 203.93,
+    "end": 207.76,
+    "text": "14, and unless Nicole Bitchie here wants me to call her parents and tell them she lied...",
+    "kor": "14살, 그리고 여기 이 니콜이 내가 부모님한테 전화해서 거짓말한 거 말하길 원하지 않는다면..."
+  },
+  {
+    "start": 207.76,
+    "end": 208.63,
+    "text": "I better go.",
+    "kor": "가는 게 나을 것 같아."
+  },
+  {
+    "start": 208.67,
+    "end": 211.51,
+    "text": "Bye, Luke. Oh, wait, why does she have to go?",
+    "kor": "잘 가, 루크. 아, 잠깐, 왜 가야 해?"
+  },
+  {
+    "start": 211.55,
+    "end": 213.59,
+    "text": "Because I said so. You're not the boss.",
+    "kor": "내가 그랬으니까. 넌 내 상관 아니야."
+  },
+  {
+    "start": 213.59,
+    "end": 215.11,
+    "text": "Don't talk back to your sister.",
+    "kor": "누나한테 말대꾸하지 마."
+  },
+  {
+    "start": 215.15,
+    "end": 216.22,
+    "text": "Eugh, I hate you.",
+    "kor": "으, 너 싫어."
+  },
+  {
+    "start": 216.71,
+    "end": 218.59,
+    "text": "You hate me now, but someday you'll thank me.",
+    "kor": "지금은 싫겠지만, 언젠가 고마워할 거야."
+  },
+  {
+    "start": 219.67,
+    "end": 221.43,
+    "text": "I think I owe mom a huge apology.",
+    "kor": "엄마한테 엄청 사과해야 할 것 같아."
+  },
+  {
+    "start": 222.75,
+    "end": 224.99,
+    "text": "Is anyone watching me?",
+    "kor": "누가 나 보고 있어?"
   }
 ];
 const BLANKS={};
@@ -583,8 +1210,8 @@ function applyFs(n){fs=n;document.documentElement.style.setProperty('--fs',n+'px
 function applyHfs(n){hfs=n;document.documentElement.style.setProperty('--hfs',n+'px');document.querySelectorAll('.h-fpo').forEach(b=>b.classList.toggle('on',+b.dataset.s===n));save();}
 function toggleHideAll(){const allHidden=Object.values(st).every(s=>s.h);Object.keys(st).forEach(k=>st[k].h=!allHidden);['v-hide','h-hide'].forEach(id=>{const btn=document.getElementById(id);if(btn)btn.textContent=allHidden?'🙈 자막가리기':'👁 자막열기';});save();layout==='horiz'?renderH():renderV();}
 function prog(){const ld=Object.values(st).filter(s=>s.l).length,tot=SUBS.length;const p=tot?Math.round(ld/tot*100):0,c=2*Math.PI*19;const fg=document.getElementById('pfg');if(fg)fg.style.strokeDashoffset=c*(1-p/100);const g=id=>document.getElementById(id);if(g('ppct'))g('ppct').textContent=p+'%';if(g('pcnt'))g('pcnt').textContent=ld+' / '+tot+' 문장';if(g('pbar'))g('pbar').style.width=p+'%';if(g('hpbar'))g('hpbar').style.width=p+'%';if(g('hptxt'))g('hptxt').textContent=p+'% ('+ld+'/'+tot+')';}
-function renderV(v){view=v||view;const div=document.getElementById('sv');div.innerHTML='';SUBS.forEach((sub,i)=>{if(view==='done'&&!st[i].l)return;const card=document.createElement('div');card.className='sc'+(i===playing?' playing':'')+( i===selIdx?' sel':'')+( st[i].l?' done':'');card.dataset.i=i;const inn=document.createElement('div');inn.className='sc-in';const pb=document.createElement('button');pb.className='spa';const es=document.createElement('span');es.className='eng';es.textContent=st[i].h?'🙈':sub.text;pb.appendChild(es);const kw=document.createElement('span');kw.className='kwrap'+(openK.has(i)?' open':'');const ks=document.createElement('span');ks.className='kt';if(showKor)ks.textContent=sub.kor;kw.appendChild(ks);pb.appendChild(kw);pb.onclick=()=>{if(showKor&&!st[i].h){openK.has(i)?openK.delete(i):openK.add(i);}doPlay(i,'v');};const acts=document.createElement('div');acts.className='sacts';const hb=document.createElement('button');hb.className='sa'+(st[i].h?' hid':'');hb.textContent='🙈';hb.onclick=e=>{e.stopPropagation();st[i].h=!st[i].h;save();renderV();};const cb=document.createElement('button');cb.className='sa'+(st[i].l?' chk':'');cb.textContent='✔';cb.onclick=e=>{e.stopPropagation();st[i].l=!st[i].l;save();renderV();prog();};acts.appendChild(hb);acts.appendChild(cb);inn.appendChild(pb);inn.appendChild(acts);card.appendChild(inn);div.appendChild(card);});prog();}
-function renderH(v){view=v||view;const div=document.getElementById('sh');div.innerHTML='';SUBS.forEach((sub,i)=>{if(view==='done'&&!st[i].l)return;const row=document.createElement('div');row.className='hrow'+(i===playing?' playing':'')+( i===selIdx?' sel':'')+( st[i].l?' done':'');row.dataset.i=i;const btn=document.createElement('button');btn.className='hsb'+(st[i].l?' done':'');const eng=document.createElement('span');eng.className='h-eng';eng.textContent=st[i].h?'🙈':sub.text;btn.appendChild(eng);const kw=document.createElement('span');kw.className='hkwrap'+(openK.has(i)?' open':'');const ks=document.createElement('span');ks.className='hkt';if(showKor)ks.textContent=sub.kor;kw.appendChild(ks);btn.appendChild(kw);btn.onclick=()=>{if(showKor&&!st[i].h){openK.has(i)?openK.delete(i):openK.add(i);}doPlay(i,'h');};const acts=document.createElement('div');acts.className='hacts';const hb=document.createElement('button');hb.className='ha'+(st[i].h?' hid':'');hb.textContent='🙈';hb.onclick=e=>{e.stopPropagation();st[i].h=!st[i].h;save();renderH();};const cb=document.createElement('button');cb.className='ha'+(st[i].l?' chk':'');cb.textContent='✔';cb.onclick=e=>{e.stopPropagation();st[i].l=!st[i].l;save();renderH();prog();};acts.appendChild(hb);acts.appendChild(cb);row.appendChild(btn);row.appendChild(acts);div.appendChild(row);});prog();}
+function renderV(v){view=v||view;const div=document.getElementById('sv');div.innerHTML='';SUBS.forEach((sub,i)=>{if(view==='done'&&!st[i].l)return;const card=document.createElement('div');card.className='sc'+(i===playing?' playing':'')+(i===selIdx?' sel':'')+(st[i].l?' done':'');card.dataset.i=i;const inn=document.createElement('div');inn.className='sc-in';const pb=document.createElement('button');pb.className='spa';const es=document.createElement('span');es.className='eng';es.textContent=st[i].h?'🙈':sub.text;pb.appendChild(es);const kw=document.createElement('span');kw.className='kwrap'+(openK.has(i)?' open':'');const ks=document.createElement('span');ks.className='kt';if(showKor)ks.textContent=sub.kor;kw.appendChild(ks);pb.appendChild(kw);pb.onclick=()=>{if(showKor&&!st[i].h){openK.has(i)?openK.delete(i):openK.add(i);}doPlay(i,'v');};const acts=document.createElement('div');acts.className='sacts';const hb=document.createElement('button');hb.className='sa'+(st[i].h?' hid':'');hb.textContent='🙈';hb.onclick=e=>{e.stopPropagation();st[i].h=!st[i].h;save();renderV();};const cb=document.createElement('button');cb.className='sa'+(st[i].l?' chk':'');cb.textContent='✔';cb.onclick=e=>{e.stopPropagation();st[i].l=!st[i].l;save();renderV();prog();};acts.appendChild(hb);acts.appendChild(cb);inn.appendChild(pb);inn.appendChild(acts);card.appendChild(inn);div.appendChild(card);});prog();}
+function renderH(v){view=v||view;const div=document.getElementById('sh');div.innerHTML='';SUBS.forEach((sub,i)=>{if(view==='done'&&!st[i].l)return;const row=document.createElement('div');row.className='hrow'+(i===playing?' playing':'')+(i===selIdx?' sel':'')+(st[i].l?' done':'');row.dataset.i=i;const btn=document.createElement('button');btn.className='hsb'+(st[i].l?' done':'');const eng=document.createElement('span');eng.className='h-eng';eng.textContent=st[i].h?'🙈':sub.text;btn.appendChild(eng);const kw=document.createElement('span');kw.className='hkwrap'+(openK.has(i)?' open':'');const ks=document.createElement('span');ks.className='hkt';if(showKor)ks.textContent=sub.kor;kw.appendChild(ks);btn.appendChild(kw);btn.onclick=()=>{if(showKor&&!st[i].h){openK.has(i)?openK.delete(i):openK.add(i);}doPlay(i,'h');};const acts=document.createElement('div');acts.className='hacts';const hb=document.createElement('button');hb.className='ha'+(st[i].h?' hid':'');hb.textContent='🙈';hb.onclick=e=>{e.stopPropagation();st[i].h=!st[i].h;save();renderH();};const cb=document.createElement('button');cb.className='ha'+(st[i].l?' chk':'');cb.textContent='✔';cb.onclick=e=>{e.stopPropagation();st[i].l=!st[i].l;save();renderH();prog();};acts.appendChild(hb);acts.appendChild(cb);row.appendChild(btn);row.appendChild(acts);div.appendChild(row);});prog();}
 function scrollTo(i,m){const id=m==='v'?'sv':'sh';const container=document.getElementById(id);const row=container?.querySelector('[data-i="'+i+'"]');if(!row)return;if(m==='h'){row.scrollIntoView({behavior:'smooth',block:'center'});return;}const top=document.querySelector('.vert-top');const headerH=top?top.offsetHeight:0;const rowTop=row.getBoundingClientRect().top+window.scrollY;window.scrollTo({top:rowTop-headerH-8,behavior:'smooth'});}
 function doPlay(i,m){selIdx=i;const cp=m==='v'?pv:ph;const re=m==='v'?renderV:renderH;re();if(!cp?.seekTo)return;const s=cp.getPlayerState();if(playing!==i){startPlay(i,m);return;}if(s===1){cp.pauseVideo();if(tid)clearTimeout(tid);paused=true;pausedIdx=i;playing=null;re();return;}if(s===2&&paused&&pausedIdx===i){startPlay(i,m);return;}startPlay(i,m);}
 function startPlay(i,m){playing=i;paused=false;pausedIdx=null;const re=m==='v'?renderV:renderH;re();scrollTo(i,m);const cp=m==='v'?pv:ph;const s=SUBS[i].start,e=playMode==='single'?SUBS[i].end:(SUBS[i+1]?SUBS[i+1].end:SUBS[i].end);cp.seekTo(s,true);cp.playVideo();if(tid)clearTimeout(tid);tid=setTimeout(()=>{cp.pauseVideo();playing=null;re();},(e-s)*1000);}
